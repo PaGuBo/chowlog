@@ -173,6 +173,23 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlateController.cs" />
+    <Compile Include="DataContexts\ChowlogDb.cs" />
+    <Compile Include="DataContexts\ChowlogMigrations\201406120143552_InitialCreate.cs" />
+    <Compile Include="DataContexts\ChowlogMigrations\201406120143552_InitialCreate.Designer.cs">
+      <DependentUpon>201406120143552_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\ChowlogMigrations\201406130114148_AddUserIdToPlate.cs" />
+    <Compile Include="DataContexts\ChowlogMigrations\201406130114148_AddUserIdToPlate.Designer.cs">
+      <DependentUpon>201406130114148_AddUserIdToPlate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\ChowlogMigrations\Configuration.cs" />
+    <Compile Include="DataContexts\IdentityDb.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201406120142520_InitialCreate.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201406120142520_InitialCreate.Designer.cs">
+      <DependentUpon>201406120142520_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,6 +244,11 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Plate\Create.cshtml" />
+    <Content Include="Views\Plate\Delete.cshtml" />
+    <Content Include="Views\Plate\Details.cshtml" />
+    <Content Include="Views\Plate\Edit.cshtml" />
+    <Content Include="Views\Plate\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -237,6 +259,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chowlog.Entities\Chowlog.Entities.csproj">
+      <Project>{0a6d4993-87ea-43ef-8b15-a9cb9981e6ce}</Project>
+      <Name>Chowlog.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataContexts\ChowlogMigrations\201406120143552_InitialCreate.resx">
+      <DependentUpon>201406120143552_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\ChowlogMigrations\201406130114148_AddUserIdToPlate.resx">
+      <DependentUpon>201406130114148_AddUserIdToPlate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\IdentityMigrations\201406120142520_InitialCreate.resx">
+      <DependentUpon>201406120142520_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
