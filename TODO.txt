@@ -1,0 +1,3 @@
+Redo all the migration work
+Add picture upload
+Convert plate create model to a view model

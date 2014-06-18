@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Chowlog.Entities;
 using Chowlog.Web.DataContexts;
 using Microsoft.AspNet.Identity;
+using Chowlog.Web.App_Code;
 
 namespace Chowlog.Web.Controllers
 {
@@ -16,6 +17,12 @@ namespace Chowlog.Web.Controllers
     public class PlateController : Controller
     {
         private ChowlogDb db = new ChowlogDb();
+        private IFileUploadService fileUploadService;
+
+        public PlateController(IFileUploadService fileUploadService)
+        {
+            this.fileUploadService = fileUploadService;
+        }
 
         // GET: /Plate/
         public ActionResult Index()

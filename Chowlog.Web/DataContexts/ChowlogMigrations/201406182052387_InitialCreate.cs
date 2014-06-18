@@ -14,6 +14,8 @@ namespace Chowlog.Web.DataContexts.ChowlogMigrations
                         Id = c.Int(nullable: false, identity: true),
                         Title = c.String(),
                         TimeEaten = c.DateTime(nullable: false),
+                        UserId = c.Guid(nullable: false),
+                        HasPicture = c.Boolean(),
                     })
                 .PrimaryKey(t => t.Id);
             
