@@ -9,14 +9,14 @@ namespace Chowlog.Web.App_Code
 {
     public class LocalFileUploadService : IFileUploadService
     {
-        public string UploadFile(HttpPostedFileBase file)
+        public string UploadFile(HttpPostedFileBase file, string fileName)
         {
             string uploadPath = ConfigurationManager.AppSettings["LocalUploadPath"];
             try
             {
                 if (file.ContentLength > 0)
                 {
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    fileName += Path.GetExtension(file.FileName);
                     var path = Path.Combine(uploadPath, fileName);
                     file.SaveAs(path);
                     return fileName;

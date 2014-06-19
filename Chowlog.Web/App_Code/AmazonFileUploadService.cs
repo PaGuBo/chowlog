@@ -11,13 +11,13 @@ namespace Chowlog.Web.App_Code
 {
     public class AmazonFileUploadService : IFileUploadService
     {
-        public string UploadFile(HttpPostedFileBase file)
+        public string UploadFile(HttpPostedFileBase file, string fileName)
         {
             try
             {
                 if (file.ContentLength > 0)
                 {
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    fileName += Path.GetExtension(file.FileName);
                     using (var client = Amazon.AWSClientFactory.CreateAmazonS3Client(ConfigurationManager.AppSettings["AWSAccessKey"],
                                                                                           ConfigurationManager.AppSettings["AWSSecretKey"]))
                     {
@@ -30,8 +30,8 @@ namespace Chowlog.Web.App_Code
 
                         var response = client.PutObject(request);
                     }
-                    return fileName;
                 }
+                return fileName;
             }
             catch (Exception e)
             {

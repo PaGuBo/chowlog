@@ -1,4 +1,4 @@
-﻿@model Chowlog.Entities.Plate
+﻿@model Chowlog.Web.ViewModels.PlateCreateViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Plate</h4>
+        <h4>PlateCreateViewModel</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)

@@ -6,16 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Chowlog.Web.ViewModels;
-using Chowlog.Web.DataContexts;
-using Chowlog.Web.App_Code;
 using Chowlog.Entities;
+using Chowlog.Web.DataContexts;
 using Microsoft.AspNet.Identity;
-using System.IO;
-using ExifLib;
+using Chowlog.Web.App_Code;
 
 namespace Chowlog.Web.Controllers
 {
+    [Authorize]
     public class PlateController : Controller
     {
         private ChowlogDb db = new ChowlogDb();
@@ -25,25 +23,27 @@ namespace Chowlog.Web.Controllers
         {
             this.fileUploadService = fileUploadService;
         }
+
         // GET: /Plate/
         public ActionResult Index()
         {
-            return View(db.Plates.ToList());
+            var uid = new Guid(User.Identity.GetUserId());
+            return View(db.Plates.Where(p => p.UserId == uid).ToList());
         }
 
         // GET: /Plate/Details/5
-        public ActionResult Details(Guid? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var platecreateviewmodel = db.Plates.Find(id);
-            if (platecreateviewmodel == null)
+            Plate plate = db.Plates.Find(id);
+            if (plate == null)
             {
                 return HttpNotFound();
             }
-            return View(platecreateviewmodel);
+            return View(plate);
         }
 
         // GET: /Plate/Create
@@ -57,62 +57,32 @@ namespace Chowlog.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PlateCreateViewModel model)
+        public ActionResult Create([Bind(Include="Id,Title,TimeEaten")] Plate plate)
         {
             if (ModelState.IsValid)
             {
-                foreach(var file in model.files)
-                {
-                    var plateId = Guid.NewGuid();
-                    var fileName = fileUploadService.UploadFile(file, plateId.ToString());
-
-                    DateTime dateTaken = DateTime.Now;
-                    try
-                    {
-                        var exifReader = new ExifReader(file.InputStream);
-                        exifReader.GetTagValue<DateTime>(ExifTags.DateTimeOriginal, out dateTaken);
-                    }
-                    //dirty fix for now
-                    catch (ExifLibException ex)
-                    {
-                        //log the error here
-                    }
-
-
-
-                    var plate = new Plate()
-                    {
-                        HasPicture = model.files.Count() > 0,
-                        Extension = Path.GetExtension(fileName),
-                        Id = plateId,
-                        TimeEaten = dateTaken,
-                        Title = model.Title,
-                        UserId = Guid.Parse(User.Identity.GetUserId())
-                    };
-                    model.Id = Guid.NewGuid();
-                    db.Plates.Add(plate);
-                    db.SaveChanges();
-                }
-
+                plate.UserId = new Guid(User.Identity.GetUserId());
+                db.Plates.Add(plate);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(model);
+            return View(plate);
         }
 
         // GET: /Plate/Edit/5
-        public ActionResult Edit(Guid? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var platecreateviewmodel = db.Plates.Find(id);
-            if (platecreateviewmodel == null)
+            Plate plate = db.Plates.Find(id);
+            if (plate == null)
             {
                 return HttpNotFound();
             }
-            return View(platecreateviewmodel);
+            return View(plate);
         }
 
         // POST: /Plate/Edit/5
@@ -120,39 +90,39 @@ namespace Chowlog.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Title,TimeEaten")] PlateCreateViewModel platecreateviewmodel)
+        public ActionResult Edit([Bind(Include="Id,Title,TimeEaten")] Plate plate)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(platecreateviewmodel).State = EntityState.Modified;
+                db.Entry(plate).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(platecreateviewmodel);
+            return View(plate);
         }
 
         // GET: /Plate/Delete/5
-        public ActionResult Delete(Guid? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var platecreateviewmodel = db.Plates.Find(id);
-            if (platecreateviewmodel == null)
+            Plate plate = db.Plates.Find(id);
+            if (plate == null)
             {
                 return HttpNotFound();
             }
-            return View(platecreateviewmodel);
+            return View(plate);
         }
 
         // POST: /Plate/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            var platecreateviewmodel = db.Plates.Find(id);
-            db.Plates.Remove(platecreateviewmodel);
+            Plate plate = db.Plates.Find(id);
+            db.Plates.Remove(plate);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

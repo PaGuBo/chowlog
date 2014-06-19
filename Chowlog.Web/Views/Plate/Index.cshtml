@@ -9,31 +9,43 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeEaten)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeEaten)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+
+
+@{
+    var query = from plate in Model
+                group plate by plate.TimeEaten.ToString("MM/dd/yyyy") into grouping
+                orderby grouping.Key descending
+                select grouping;
 }
 
-</table>
+
+
+<div class="row">
+    @foreach (var grouping in query)
+    {
+        <div style="margin-bottom: 2px;">
+            <div style="background-color: Black; color: White; font-size: 1.2em; font-weight: bold; padding: 2px 0px 2px 10px; margin: 5px 0px 5px 0px; clear: both;">
+                @grouping.Key
+            </div>
+
+            <ul style="padding-left:0px;">
+                @foreach (var plate in grouping.OrderBy(p => p.TimeEaten))
+                {
+                    <li style="display: inline;list-style:none;">
+
+                        @*@Html.ActionLink("Edit", "Edit", new { id = plate.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = plate.Id })*@
+
+                        <img src="@("/uploads/" + plate.Id + plate.Extension + "?w=200&h=200&mode=crop")" />
+                        @*@plate.Title, @plate.TimeEaten*@
+                    </li>
+
+                }
+            </ul>
+
+
+
+        </div>
+    }
+</div>

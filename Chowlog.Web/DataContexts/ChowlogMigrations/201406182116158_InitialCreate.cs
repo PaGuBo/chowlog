@@ -11,7 +11,7 @@ namespace Chowlog.Web.DataContexts.ChowlogMigrations
                 "dbo.Plates",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false),
                         Title = c.String(),
                         TimeEaten = c.DateTime(nullable: false),
                         UserId = c.Guid(nullable: false),

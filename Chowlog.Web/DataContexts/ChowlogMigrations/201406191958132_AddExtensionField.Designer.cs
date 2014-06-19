@@ -7,13 +7,13 @@ namespace Chowlog.Web.DataContexts.ChowlogMigrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-20911")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class AddExtensionField : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddExtensionField));
         
         string IMigrationMetadata.Id
         {
-            get { return "201406182052387_InitialCreate"; }
+            get { return "201406191958132_AddExtensionField"; }
         }
         
         string IMigrationMetadata.Source
