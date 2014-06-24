@@ -1,4 +1,3 @@
-
-Add picture upload
 Make multiple plates more elegant
 Investigate automapper
+Move context and migrations to a new project

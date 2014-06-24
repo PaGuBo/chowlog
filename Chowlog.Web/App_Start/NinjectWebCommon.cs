@@ -10,9 +10,6 @@ namespace Chowlog.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
-    using System.Configuration;
-    using Ninject.Modules;
-    using Chowlog.Web.App_Code;
 
     public static class NinjectWebCommon 
     {
@@ -43,36 +40,27 @@ namespace Chowlog.Web.App_Start
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
-            kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
-            kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
-            string moduleName = ConfigurationManager.AppSettings["InjectModule"];
-            Type moduleType = Type.GetType(moduleName);
-
-            if (moduleType != null)
+            try
             {
-                kernel.Load(Activator.CreateInstance(moduleType) as NinjectModule);
-            }
-            else
-            {
-                throw new Exception(string.Format("Could not find Type: '{0}'", moduleName));
-            }
-            return kernel;
-        }     
-    }
-    public class ProductionModule : NinjectModule
-    {
-        public override void Load()
-        {
-            Bind<IFileUploadService>().To<AmazonFileUploadService>();
-        }
-    }
+                kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
+                kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-    public class DevelopmentModule : NinjectModule
-    {
-        public override void Load()
-        {
-            Bind<IFileUploadService>().To<LocalFileUploadService>();
+                RegisterServices(kernel);
+                return kernel;
+            }
+            catch
+            {
+                kernel.Dispose();
+                throw;
+            }
         }
+
+        /// <summary>
+        /// Load your modules or register your services here!
+        /// </summary>
+        /// <param name="kernel">The kernel.</param>
+        private static void RegisterServices(IKernel kernel)
+        {
+        }        
     }
 }
