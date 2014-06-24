@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{67042DE5-EDA5-4314-94A2-16CD5EDB83AA}</ProjectGuid>
+    <ProjectGuid>{C5A84021-87DE-4AA8-8622-BEF6B2D77701}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Chowlog.WebApi.Tests</RootNamespace>
@@ -96,6 +96,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chowlog.WebApi\Chowlog.WebApi.csproj">
+      <Project>{D2AC3A8F-D93D-4CDD-8200-6274F4B081A3}</Project>
+      <Name>Chowlog.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

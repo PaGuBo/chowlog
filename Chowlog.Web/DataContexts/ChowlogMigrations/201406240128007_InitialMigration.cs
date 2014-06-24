@@ -3,7 +3,7 @@ namespace Chowlog.Web.DataContexts.ChowlogMigrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -16,6 +16,7 @@ namespace Chowlog.Web.DataContexts.ChowlogMigrations
                         TimeEaten = c.DateTime(nullable: false),
                         UserId = c.Guid(nullable: false),
                         HasPicture = c.Boolean(),
+                        Extension = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

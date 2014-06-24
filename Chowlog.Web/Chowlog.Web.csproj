@@ -212,19 +212,15 @@
     <Compile Include="Controllers\PlateController.cs" />
     <None Include="Controllers\PlateController.old.cs.old" />
     <Compile Include="DataContexts\ChowlogDb.cs" />
-    <Compile Include="DataContexts\ChowlogMigrations\201406182116158_InitialCreate.cs" />
-    <Compile Include="DataContexts\ChowlogMigrations\201406182116158_InitialCreate.Designer.cs">
-      <DependentUpon>201406182116158_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataContexts\ChowlogMigrations\201406191958132_AddExtensionField.cs" />
-    <Compile Include="DataContexts\ChowlogMigrations\201406191958132_AddExtensionField.Designer.cs">
-      <DependentUpon>201406191958132_AddExtensionField.cs</DependentUpon>
+    <Compile Include="DataContexts\ChowlogMigrations\201406240128007_InitialMigration.cs" />
+    <Compile Include="DataContexts\ChowlogMigrations\201406240128007_InitialMigration.Designer.cs">
+      <DependentUpon>201406240128007_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\ChowlogMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDb.cs" />
-    <Compile Include="DataContexts\IdentityMigrations\201406182116071_InitialCreate.cs" />
-    <Compile Include="DataContexts\IdentityMigrations\201406182116071_InitialCreate.Designer.cs">
-      <DependentUpon>201406182116071_InitialCreate.cs</DependentUpon>
+    <Compile Include="DataContexts\IdentityMigrations\201406240126394_InitialMigration.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201406240126394_InitialMigration.Designer.cs">
+      <DependentUpon>201406240126394_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -305,14 +301,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DataContexts\ChowlogMigrations\201406182116158_InitialCreate.resx">
-      <DependentUpon>201406182116158_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="DataContexts\ChowlogMigrations\201406240128007_InitialMigration.resx">
+      <DependentUpon>201406240128007_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataContexts\ChowlogMigrations\201406191958132_AddExtensionField.resx">
-      <DependentUpon>201406191958132_AddExtensionField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DataContexts\IdentityMigrations\201406182116071_InitialCreate.resx">
-      <DependentUpon>201406182116071_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="DataContexts\IdentityMigrations\201406240126394_InitialMigration.resx">
+      <DependentUpon>201406240126394_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
