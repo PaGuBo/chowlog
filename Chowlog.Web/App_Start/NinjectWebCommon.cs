@@ -58,15 +58,7 @@ namespace Chowlog.Web.App_Start
                 throw new Exception(string.Format("Could not find Type: '{0}'", moduleName));
             }
             return kernel;
-        }
-
-        ///// <summary>
-        ///// Load your modules or register your services here!
-        ///// </summary>
-        ///// <param name="kernel">The kernel.</param>
-        //private static void RegisterServices(IKernel kernel)
-        //{
-        //}        
+        }     
     }
     public class ProductionModule : NinjectModule
     {
