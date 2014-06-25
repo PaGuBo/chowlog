@@ -7,12 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Chowlog.Web.ViewModels;
-using Chowlog.Web.DataContexts;
 using Chowlog.Web.App_Code;
 using Chowlog.Entities;
 using Microsoft.AspNet.Identity;
 using System.IO;
 using ExifLib;
+using Chowlog.Web.DataContexts;
 
 namespace Chowlog.Web.Controllers
 {

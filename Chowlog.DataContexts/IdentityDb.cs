@@ -1,4 +1,4 @@
-﻿using Chowlog.Web.Models;
+﻿using Chowlog.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;

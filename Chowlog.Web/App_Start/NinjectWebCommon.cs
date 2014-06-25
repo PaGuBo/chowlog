@@ -10,6 +10,9 @@ namespace Chowlog.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Chowlog.Web.App_Code;
+    using Ninject.Modules;
+    using System.Configuration;
 
     public static class NinjectWebCommon 
     {
@@ -45,7 +48,19 @@ namespace Chowlog.Web.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-                RegisterServices(kernel);
+                //RegisterServices(kernel);
+                //return kernel;
+                string moduleName = ConfigurationManager.AppSettings["InjectModule"];
+                Type moduleType = Type.GetType(moduleName);
+
+                if (moduleType != null)
+                {
+                    kernel.Load(Activator.CreateInstance(moduleType) as NinjectModule);
+                }
+                else
+                {
+                    throw new Exception(string.Format("Could not find Type: '{0}'", moduleName));
+                }
                 return kernel;
             }
             catch
@@ -59,8 +74,23 @@ namespace Chowlog.Web.App_Start
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
-        private static void RegisterServices(IKernel kernel)
+        //private static void RegisterServices(IKernel kernel)
+        //{
+        //}        
+    }
+    public class ProductionModule : NinjectModule
+    {
+        public override void Load()
         {
-        }        
+            Bind<IFileUploadService>().To<AmazonFileUploadService>();
+        }
+    }
+
+    public class DevelopmentModule : NinjectModule
+    {
+        public override void Load()
+        {
+            Bind<IFileUploadService>().To<LocalFileUploadService>();
+        }
     }
 }

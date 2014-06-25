@@ -234,13 +234,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Controllers\PlateController.old.cs.old" />
-    <Compile Include="DataContexts\ChowlogDb.cs" />
-    <Compile Include="DataContexts\IdentityDb.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\PlateCreateViewModel.cs" />
@@ -306,14 +303,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DataContexts\ChowlogMigrations\" />
-    <Folder Include="DataContexts\IdentityMigrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Chowlog.DataContexts\Chowlog.DataContexts.csproj">
+      <Project>{b19ad942-2956-49c6-aae2-0c9d58ed5880}</Project>
+      <Name>Chowlog.DataContexts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Chowlog.Entities\Chowlog.Entities.csproj">
       <Project>{0a6d4993-87ea-43ef-8b15-a9cb9981e6ce}</Project>
       <Name>Chowlog.Entities</Name>

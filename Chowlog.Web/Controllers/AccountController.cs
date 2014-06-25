@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Chowlog.Web.Models;
+using Chowlog.Entities;
 using Chowlog.Web.DataContexts;
 
 namespace Chowlog.Web.Controllers

@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chowlog.WebApi", "Chowlog.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chowlog.WebApi.Tests", "Chowlog.WebApi.Tests\Chowlog.WebApi.Tests.csproj", "{C5A84021-87DE-4AA8-8622-BEF6B2D77701}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chowlog.DataContexts", "Chowlog.DataContexts\Chowlog.DataContexts.csproj", "{B19AD942-2956-49C6-AAE2-0C9D58ED5880}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{C5A84021-87DE-4AA8-8622-BEF6B2D77701}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5A84021-87DE-4AA8-8622-BEF6B2D77701}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5A84021-87DE-4AA8-8622-BEF6B2D77701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B19AD942-2956-49C6-AAE2-0C9D58ED5880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B19AD942-2956-49C6-AAE2-0C9D58ED5880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B19AD942-2956-49C6-AAE2-0C9D58ED5880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B19AD942-2956-49C6-AAE2-0C9D58ED5880}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
