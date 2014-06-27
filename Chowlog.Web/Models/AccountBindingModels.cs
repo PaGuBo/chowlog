@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Chowlog.Web.Models
 {
-    public class ExternalLoginConfirmationViewModel
+    // Models used as parameters to AccountController actions.
+
+    public class AddExternalLoginBindingModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "External access token")]
+        public string ExternalAccessToken { get; set; }
     }
 
-    public class ManageUserViewModel
+    public class ChangePasswordBindingModel
     {
         [Required]
         [DataType(DataType.Password)]
@@ -29,22 +32,7 @@ namespace Chowlog.Web.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class LoginViewModel
-    {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
-    }
-
-    public class RegisterViewModel
+    public class RegisterBindingModel
     {
         [Required]
         [Display(Name = "User name")]
@@ -62,49 +50,35 @@ namespace Chowlog.Web.Models
         public string ConfirmPassword { get; set; }
     }
 
-
-
-
-
-
-
-
-
-    //from the web api project
-
-    public class ExternalLoginViewModel
+    public class RegisterExternalBindingModel
     {
-        public string Name { get; set; }
-
-        public string Url { get; set; }
-
-        public string State { get; set; }
-    }
-
-    public class ManageInfoViewModel
-    {
-        public string LocalLoginProvider { get; set; }
-
+        [Required]
+        [Display(Name = "User name")]
         public string UserName { get; set; }
-
-        public IEnumerable<UserLoginInfoViewModel> Logins { get; set; }
-
-        public IEnumerable<ExternalLoginViewModel> ExternalLoginProviders { get; set; }
     }
 
-    public class UserInfoViewModel
+    public class RemoveLoginBindingModel
     {
-        public string UserName { get; set; }
-
-        public bool HasRegistered { get; set; }
-
-        public string LoginProvider { get; set; }
-    }
-
-    public class UserLoginInfoViewModel
-    {
+        [Required]
+        [Display(Name = "Login provider")]
         public string LoginProvider { get; set; }
 
+        [Required]
+        [Display(Name = "Provider key")]
         public string ProviderKey { get; set; }
+    }
+
+    public class SetPasswordBindingModel
+    {
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
     }
 }
