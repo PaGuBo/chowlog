@@ -223,6 +223,7 @@
     <Compile Include="App_Code\AmazonFileUploadService.cs" />
     <Compile Include="App_Code\IFileUploadService.cs" />
     <Compile Include="App_Code\LocalFileUploadService.cs" />
+    <Compile Include="App_Code\Utils.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\AccountController.cs" />
+    <Compile Include="Controllers\API\PlateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlateController.cs" />
     <Content Include="Content\bootstrap-theme.css" />

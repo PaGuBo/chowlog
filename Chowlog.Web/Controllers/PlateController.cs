@@ -14,6 +14,7 @@ using System.IO;
 using ExifLib;
 using Chowlog.Web.DataContexts;
 
+
 namespace Chowlog.Web.Controllers
 {
     public class PlateController : Controller
@@ -64,19 +65,11 @@ namespace Chowlog.Web.Controllers
                 foreach(var file in model.files)
                 {
                     var plateId = Guid.NewGuid();
-                    var fileName = fileUploadService.UploadFile(file, plateId.ToString());
+                    var fileName = fileUploadService.UploadFile(file, plateId.ToString() + Path.GetExtension(file.FileName));
 
-                    DateTime dateTaken = DateTime.Now;
-                    try
-                    {
-                        var exifReader = new ExifReader(file.InputStream);
-                        exifReader.GetTagValue<DateTime>(ExifTags.DateTimeOriginal, out dateTaken);
-                    }
-                    //dirty fix for now
-                    catch (ExifLibException ex)
-                    {
-                        //log the error here
-                    }
+                    var dateTaken = Utils.GetDateTaken(file.InputStream);
+
+
 
 
 
@@ -89,7 +82,7 @@ namespace Chowlog.Web.Controllers
                         Title = model.Title,
                         UserId = Guid.Parse(User.Identity.GetUserId())
                     };
-                    model.Id = Guid.NewGuid();
+                    //model.Id = Guid.NewGuid();
                     db.Plates.Add(plate);
                     db.SaveChanges();
                 }

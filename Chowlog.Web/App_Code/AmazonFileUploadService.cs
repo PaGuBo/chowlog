@@ -40,5 +40,11 @@ namespace Chowlog.Web.App_Code
             }
             return "";
         }
+
+
+        public string UploadFile(byte[] file, string fileName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

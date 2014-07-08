@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
+using System.Web;
 
 namespace Chowlog.Web
 {
@@ -45,7 +46,7 @@ namespace Chowlog.Web
                 {
                     OnApplyRedirect = ctx =>
                     {
-                        if (!IsAjaxRequest(ctx.Request))
+                        if (!IsApiRequest(ctx.Request))
                         {
                             ctx.Response.Redirect(ctx.RedirectUri);
                         }
@@ -72,15 +73,10 @@ namespace Chowlog.Web
             //app.UseGoogleAuthentication();
         }
 
-        private static bool IsAjaxRequest(IOwinRequest request)
+        private static bool IsApiRequest(IOwinRequest request)
         {
-            IReadableStringCollection query = request.Query;
-            if ((query != null) && (query["X-Requested-With"] == "XMLHttpRequest"))
-            {
-                return true;
-            }
-            IHeaderDictionary headers = request.Headers;
-            return ((headers != null) && (headers["X-Requested-With"] == "XMLHttpRequest"));
+            string apiPath = VirtualPathUtility.ToAbsolute("~/api/");
+            return request.Uri.LocalPath.StartsWith(apiPath);
         }
     }
 }

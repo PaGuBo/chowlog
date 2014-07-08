@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using Chowlog.Entities;
 using Chowlog.Web.DataContexts;
 using Microsoft.AspNet.Identity;
+using Chowlog.Web.ViewModels;
 
 namespace Chowlog.WebApi.Controllers
 {
@@ -75,7 +76,7 @@ namespace Chowlog.WebApi.Controllers
         // POST api/Plate
         [ResponseType(typeof(Plate))]
         [Authorize]
-        public IHttpActionResult PostPlate(Plate plate)
+        public IHttpActionResult PostPlate(PlateCreateViewModel model)
         {
             if (!ModelState.IsValid)
             {

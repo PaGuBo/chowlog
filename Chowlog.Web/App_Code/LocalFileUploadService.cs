@@ -9,16 +9,36 @@ namespace Chowlog.Web.App_Code
 {
     public class LocalFileUploadService : IFileUploadService
     {
+        private string uploadPath = ConfigurationManager.AppSettings["LocalUploadPath"];
+
         public string UploadFile(HttpPostedFileBase file, string fileName)
         {
-            string uploadPath = ConfigurationManager.AppSettings["LocalUploadPath"];
             try
             {
                 if (file.ContentLength > 0)
                 {
-                    fileName += Path.GetExtension(file.FileName);
                     var path = Path.Combine(uploadPath, fileName);
                     file.SaveAs(path);
+                    return fileName;
+                }
+            }
+            catch (Exception e)
+            {
+                //TempData["Result"] = "Error!" + e.Message;
+                throw new Exception("File Upload Failed!");
+            }
+            return "";
+        }
+
+
+        public string UploadFile(byte[] file, string fileName)
+        {
+            try
+            {
+                if (file.Length > 0)
+                {
+                    var path = Path.Combine(uploadPath, fileName);
+                    File.WriteAllBytes(path, file);
                     return fileName;
                 }
             }

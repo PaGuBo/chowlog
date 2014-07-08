@@ -36,9 +36,9 @@
 
                         @*@Html.ActionLink("Edit", "Edit", new { id = plate.Id })
                         @Html.ActionLink("Delete", "Delete", new { id = plate.Id })*@
-
+                        @plate.Title, @plate.TimeEaten
                         <img src="@("/uploads/" + plate.Id + plate.Extension + "?w=200&h=200&mode=crop")" />
-                        @*@plate.Title, @plate.TimeEaten*@
+                        
                     </li>
 
                 }

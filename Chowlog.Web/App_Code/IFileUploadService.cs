@@ -11,5 +11,6 @@ namespace Chowlog.Web.App_Code
     public interface IFileUploadService
     {
         string UploadFile(HttpPostedFileBase file, string fileName);
+        string UploadFile(byte[] file, string fileName);
     }
 }
