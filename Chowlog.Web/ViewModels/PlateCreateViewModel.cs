@@ -10,9 +10,9 @@ namespace Chowlog.Web.ViewModels
     {
         [Key]
         public Guid Id { get; set; }
-        public string Title { get; set; }
+        public String Title { get; set; }
 
-        public DateTime TimeEaten { get; set; }
+        public DateTime? TimeEaten { get; set; }
 
         [Required]
         public HttpPostedFileBase[] files { get; set; }

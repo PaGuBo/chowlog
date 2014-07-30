@@ -223,7 +223,7 @@
     <Compile Include="App_Code\AmazonFileUploadService.cs" />
     <Compile Include="App_Code\IFileUploadService.cs" />
     <Compile Include="App_Code\LocalFileUploadService.cs" />
-    <Content Include="App_Code\Secret.cs" />
+    <Compile Include="App_Code\Secret.cs" />
     <Compile Include="App_Code\Utils.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

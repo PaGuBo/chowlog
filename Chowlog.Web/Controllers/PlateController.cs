@@ -29,7 +29,8 @@ namespace Chowlog.Web.Controllers
         // GET: /Plate/
         public ActionResult Index()
         {
-            return View(db.Plates.ToList());
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            return View(db.Plates.Where(p => p.UserId == userId).ToList());
         }
 
         // GET: /Plate/Details/5
@@ -68,10 +69,6 @@ namespace Chowlog.Web.Controllers
                     var fileName = fileUploadService.UploadFile(file, plateId.ToString() + Path.GetExtension(file.FileName));
 
                     var dateTaken = Utils.GetDateTaken(file.InputStream);
-
-
-
-
 
                     var plate = new Plate()
                     {

@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+Secret.cs
 
 # Build results
 

@@ -18,8 +18,11 @@ namespace Chowlog.Web.App_Code
                 if (file.ContentLength > 0)
                 {
                     fileName += Path.GetExtension(file.FileName);
-                    using (var client = Amazon.AWSClientFactory.CreateAmazonS3Client(ConfigurationManager.AppSettings["AWSAccessKey"],
-                                                                                          ConfigurationManager.AppSettings["AWSSecretKey"]))
+                    if (Secret.AWSSecretKey == "" || Secret.AWSAccessKey == "")
+                    {
+                        throw (new Exception("AWS Keys not specified. Did you forget to edit Secret.cs?"));
+                    }
+                    using (var client = Amazon.AWSClientFactory.CreateAmazonS3Client(Secret.AWSAccessKey, Secret.AWSSecretKey))
                     {
                         PutObjectRequest request = new PutObjectRequest();
 
@@ -36,7 +39,7 @@ namespace Chowlog.Web.App_Code
             catch (Exception e)
             {
                 //TempData["Result"] = "Error!" + e.Message;
-                throw new Exception("File Upload Failed!");
+                throw new Exception("File Upload Failed! " + e.Message, e);
             }
             return "";
         }
