@@ -33,21 +33,7 @@ namespace Chowlog.Web.App_Code
 
         public string UploadFile(byte[] file, string fileName)
         {
-            try
-            {
-                if (file.Length > 0)
-                {
-                    var path = Path.Combine(uploadPath, fileName);
-                    File.WriteAllBytes(path, file);
-                    return fileName;
-                }
-            }
-            catch (Exception e)
-            {
-                //TempData["Result"] = "Error!" + e.Message;
-                throw new Exception("File Upload Failed!");
-            }
-            return "";
+            throw new NotImplementedException();
         }
     }
 }

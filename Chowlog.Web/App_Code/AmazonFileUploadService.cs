@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace Chowlog.Web.App_Code
@@ -17,18 +18,19 @@ namespace Chowlog.Web.App_Code
             {
                 if (file.ContentLength > 0)
                 {
-                    fileName += Path.GetExtension(file.FileName);
+                    //fileName += Path.GetExtension(file.FileName);
                     if (Secret.AWSSecretKey == "" || Secret.AWSAccessKey == "")
                     {
                         throw (new Exception("AWS Keys not specified. Did you forget to edit Secret.cs?"));
                     }
-                    using (var client = Amazon.AWSClientFactory.CreateAmazonS3Client(Secret.AWSAccessKey, Secret.AWSSecretKey))
+                    using (var client = Amazon.AWSClientFactory.CreateAmazonS3Client(Secret.AWSAccessKey, Secret.AWSSecretKey, Amazon.RegionEndpoint.USEast1))
                     {
                         PutObjectRequest request = new PutObjectRequest();
 
                         request.BucketName = ConfigurationManager.AppSettings["bucketname"];
                         request.CannedACL = S3CannedACL.PublicRead;
                         request.Key = fileName;
+
                         request.InputStream = file.InputStream;
 
                         var response = client.PutObject(request);

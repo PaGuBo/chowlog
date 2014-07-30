@@ -13,10 +13,12 @@ using Microsoft.AspNet.Identity;
 using System.IO;
 using ExifLib;
 using Chowlog.Web.DataContexts;
+using System.Text;
 
 
 namespace Chowlog.Web.Controllers
 {
+    [Authorize]
     public class PlateController : Controller
     {
         private ChowlogDb db = new ChowlogDb();
@@ -65,10 +67,12 @@ namespace Chowlog.Web.Controllers
             {
                 foreach(var file in model.files)
                 {
+                    var dateTaken = Utils.GetDateTaken(file.InputStream);
+
                     var plateId = Guid.NewGuid();
                     var fileName = fileUploadService.UploadFile(file, plateId.ToString() + Path.GetExtension(file.FileName));
 
-                    var dateTaken = Utils.GetDateTaken(file.InputStream);
+                    
 
                     var plate = new Plate()
                     {

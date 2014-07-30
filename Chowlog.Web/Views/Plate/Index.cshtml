@@ -66,7 +66,9 @@
 
                                 </p>
                             </div>
-                            <img src="@("/uploads/" + plate.Id + plate.Extension + "?w=190&h=190&mode=crop")" />
+                            
+                            <img src="@(System.Configuration.ConfigurationManager.AppSettings["PlateImagePrefix"] + "/" + plate.Id + plate.Extension + "?w=190&h=190&mode=crop")" />
+
                         </div>
                     </div>
 
