@@ -82,7 +82,6 @@ namespace Chowlog.Web.Controllers
                         Title = model.Title,
                         UserId = Guid.Parse(User.Identity.GetUserId())
                     };
-                    //model.Id = Guid.NewGuid();
                     db.Plates.Add(plate);
                     db.SaveChanges();
                 }
@@ -113,15 +112,15 @@ namespace Chowlog.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Title,TimeEaten")] PlateCreateViewModel platecreateviewmodel)
+        public ActionResult Edit([Bind(Include = "Id,Title,TimeEaten,Extension")] Plate plate)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(platecreateviewmodel).State = EntityState.Modified;
+                db.Entry(plate).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(platecreateviewmodel);
+            return View(plate);
         }
 
         // GET: /Plate/Delete/5

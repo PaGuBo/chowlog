@@ -17,10 +17,15 @@ namespace Chowlog.Web.App_Code
                 var exifReader = new ExifReader(stream);
                 exifReader.GetTagValue<DateTime>(ExifTags.DateTimeOriginal, out dateTaken);
             }
+
             //dirty fix for now
             catch (ExifLibException ex)
             {
                 //log the error here
+            }
+            if (dateTaken == DateTime.Parse("01/01/0001"))
+            {
+                dateTaken = DateTime.Now;
             }
             return dateTaken;
         }

@@ -122,7 +122,9 @@ namespace Chowlog.Web.Api.Controllers
         public async Task<IHttpActionResult> Upload()
         {
             if (!Request.Content.IsMimeMultipartContent())
-                throw new Exception(); // divided by zero
+            {
+                throw new Exception(); 
+            }
 
             var provider = new MultipartMemoryStreamProvider();
             await Request.Content.ReadAsMultipartAsync(provider);
@@ -141,10 +143,8 @@ namespace Chowlog.Web.Api.Controllers
                     Extension = Path.GetExtension(fileName),
                     Id = plateId,
                     TimeEaten = dateTaken,
-                    //Title = model.Title,
                     UserId = Guid.Parse(User.Identity.GetUserId())
                 };
-                //model.Id = Guid.NewGuid();
                 db.Plates.Add(plate);
                 db.SaveChanges();
 
