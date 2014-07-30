@@ -13,12 +13,7 @@ namespace Chowlog.Web.App_Code
     
     public static class Secret
     {
-        public String AWSSecretKey
-        {
-            get
-            {
-                return "";
-            }
-        }
+        public static const String AWSAccessKey = "";
+        public static const String AWSSecretKey = "";
     }
 }
